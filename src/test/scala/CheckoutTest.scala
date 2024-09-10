@@ -25,4 +25,15 @@ class CheckoutTest  extends AnyFunSuite {
     val checkout = new Checkout()
     assert(checkout.totalCost(List("Orange","Orange","Orange")) == BigDecimal(0.50))
   }
+
+  test("Cart with 2 apples and 3 oranges should apply offers and return £1.10"){
+    val cart = List("Apple","Apple","Orange","Orange","Orange")
+    val checkout = new Checkout()
+    assert(checkout.totalCost(cart) == BigDecimal(1.10))
+  }
+
+  test("Total cost should ignore invalid items"){
+    val checkout = new Checkout()
+    assert(checkout.totalCost(List("Apple","Banana","Orange")) == BigDecimal(0.85))
+  }
 }

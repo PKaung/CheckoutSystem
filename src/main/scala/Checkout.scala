@@ -1,13 +1,27 @@
 class Checkout {
+
+  private val applePrice = BigDecimal(0.60)
+  private val orangePrice = BigDecimal(0.25)
   def totalCost(items: List[String]): BigDecimal = {
-    val prices = Map("Apple" -> BigDecimal(0.60), "Orange" -> BigDecimal(0.25))
 
-    val apples = items.count(_ == "Apple")
-    val oranges = items.count(_ == "Orange")
+    val apples = countItems(items,"Apple")
+    val oranges = countItems(items, "Orange")
 
-    val appleTotalPrices = (apples / 2 + apples % 2) * prices("Apple").setScale(2,BigDecimal.RoundingMode.HALF_UP)
-    val orangeTotalPrices = ((oranges / 3) * 2 + oranges % 3)  * prices("Orange").setScale(2,BigDecimal.RoundingMode.HALF_UP)
+    val appleTotalPrices = calculateAppleTotalPrice(apples)
+    val orangeTotalPrices = calculateOrangeTotalPrice(oranges)
 
     (appleTotalPrices+orangeTotalPrices).setScale(2,BigDecimal.RoundingMode.HALF_UP)
+  }
+
+  private def calculateAppleTotalPrice(apples: Int): BigDecimal = {
+    (apples / 2 + apples % 2) * applePrice.setScale(2, BigDecimal.RoundingMode.HALF_UP)
+  }
+
+  private def calculateOrangeTotalPrice(oranges: Int): BigDecimal = {
+    ((oranges / 3) * 2 + oranges % 3)  * orangePrice.setScale(2,BigDecimal.RoundingMode.HALF_UP)
+  }
+
+  private def countItems(items: List[String], item: String): Int = {
+    items.count(_ == item)
   }
 }
