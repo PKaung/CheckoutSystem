@@ -5,4 +5,9 @@ class CheckoutTest  extends AnyFunSuite {
     val checkout = new Checkout()
     assert(checkout.totalCost(List.empty) == BigDecimal(0.00))
   }
+
+  test("Total cost of apples and oranges should be calculated correctly"){
+    val checkout = new Checkout()
+    assert(checkout.totalCost(List("Apple","Orange")) == BigDecimal(0.85))
+  }
 }
