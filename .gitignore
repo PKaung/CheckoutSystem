@@ -1,0 +1,16 @@
+# sbt specific
+project/target/
+target/
+*.log
+*.class
+
+# IntelliJ IDEA specific
+.idea/
+*.iws
+*.iml
+out/
+.bsp/
+
+# OS specific
+.DS_Store
+Thumbs.db
